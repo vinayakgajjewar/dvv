@@ -1,2 +1,1 @@
-# dvv
-Implementation of dotted version vectors for fine grained causality tracking
+[preguica2010dotted](https://arxiv.org/abs/1011.5808)
