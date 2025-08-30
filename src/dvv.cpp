@@ -1,4 +1,12 @@
+#include <unordered_set>
+
 #include "../include/dvv.hpp"
+
+/*
+ * TODO
+ *
+ * Private helper functions should be static?
+ */
 
 std::vector<std::string> dvv_ids(const dvv &a) {
     std::vector<std::string> ids;
@@ -47,13 +55,33 @@ bool dvv_leq(const dvv &a, const dvv &b) {
     return dvv_leq;
 }
 
-bool dvv_descends(const std::vector<dvv> &a, const std::vector<dvv> &b) {
+int dvv_ceil(const dvv &d, const std::string &id) {
+    auto max = 0;
+    for (const auto &[d_id, d_counters]: d) {
+        if (d_id == id) max = d_counters[d_counters.size() - 1];
+    }
+    return max;
 }
 
-bool dvv_dominates(const std::vector<dvv> &a, const std::vector<dvv> &b);
+int dvv_ceil(const std::vector<dvv> &dvvs, const std::string &id) {
+    auto max = 0;
+    for (const auto &d: dvvs) {
+        max = std::max(max, dvv_ceil(d, id));
+    }
+    return max;
+}
 
 std::vector<dvv> dvv_sync(const std::vector<dvv> &a, const std::vector<dvv> &b) {
-
+    std::vector<dvv> concurrent;
+    auto a_ids = dvv_ids(a);
+    auto b_ids = dvv_ids(b);
+    std::unordered_set<std::string> ids(a_ids.begin(), a_ids.end());
+    ids.insert(b_ids.begin(), b_ids.end());
+    for (const auto &id: ids) {
+        // TODO
+    }
 }
 
-std::vector<dvv> dvv_update() {}
+std::vector<dvv> dvv_update() {
+
+}
