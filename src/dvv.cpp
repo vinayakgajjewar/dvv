@@ -1,3 +1,4 @@
+#include <iostream>
 #include <unordered_set>
 
 #include "../include/dvv.hpp"
@@ -92,4 +93,15 @@ dvv dvv_update(const std::vector<dvv> &ctx, const std::vector<dvv> &node_dvvs, c
     auto s_r = dvv_ceil(node_dvvs, node_id);
     updated[node_id] = {s_r, s_r + 1};
     return updated;
+}
+
+void dvv_print(const dvv &d) {
+    for (const auto &[id, counters]: d) {
+        std::cout << id << std::endl;
+        std::cout << "\t";
+        for (auto c: counters) {
+            std::cout << c << ",";
+        }
+        std::cout << std::endl;
+    }
 }
