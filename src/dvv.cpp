@@ -4,11 +4,8 @@
 #include "../include/dvv.hpp"
 
 /*
- * TODO
- *
- * Private helper functions should be static?
+ * Get the set of node IDs in a given DVV.
  */
-
 std::vector<std::string> dvv_ids(const dvv &a) {
     std::vector<std::string> ids;
     for (const auto &[id, counters]: a) {
@@ -17,6 +14,9 @@ std::vector<std::string> dvv_ids(const dvv &a) {
     return ids;
 }
 
+/*
+ * Get the set of node IDs in a given DVV set.
+ */
 std::vector<std::string> dvv_ids(const std::vector<dvv> &v) {
     std::vector<std::string> ids;
     for (const auto &d: v) {
@@ -56,6 +56,12 @@ bool dvv_leq(const dvv &a, const dvv &b) {
     return dvv_leq;
 }
 
+/*
+ * Return the max counter value in a DVV for a given identifier.
+ *
+ * TODO
+ * This implementation is inefficient. We can just look up the ID in the DVV.
+ */
 int dvv_ceil(const dvv &d, const std::string &id) {
     auto max = 0;
     for (const auto &[d_id, d_counters]: d) {
@@ -64,6 +70,9 @@ int dvv_ceil(const dvv &d, const std::string &id) {
     return max;
 }
 
+/*
+ * Get the max counter value in a set of DVVs for a given identifier.
+ */
 int dvv_ceil(const std::vector<dvv> &dvvs, const std::string &id) {
     auto max = 0;
     for (const auto &d: dvvs) {
