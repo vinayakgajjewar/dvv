@@ -14,6 +14,8 @@ std::vector<std::string> dvv_ids(const std::vector<dvv> &);
 
 bool elem_leq(const std::vector<int> &, const std::vector<int> &);
 
+bool dvv_leq(const dvv &, const dvv &);
+
 bool dvv_descends(const std::vector<dvv> &, const std::vector<dvv> &);
 
 bool dvv_dominates(const std::vector<dvv> &, const std::vector<dvv> &);

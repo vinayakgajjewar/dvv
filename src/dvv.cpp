@@ -28,8 +28,26 @@ bool elem_leq(const std::vector<int> &a, const std::vector<int> &b) {
     return (a.at(1) <= b.at(0) || (a.at(0) <= b.at(0) && a.at(1) == b.at(1)));
 }
 
+bool dvv_leq(const dvv &a, const dvv &b) {
+    bool dvv_leq = true;
+    for (const auto &[a_id, a_counters]: a) {
+        bool id_leq = false;
+        for (const auto &[b_id, b_counters]: b) {
+            if (a_id != b_id) continue;
+            if (elem_leq(a_counters, b_counters)) {
+                id_leq = true;
+                break;
+            }
+        }
+        if (!id_leq) {
+            dvv_leq = false;
+            break;
+        }
+    }
+    return dvv_leq;
+}
+
 bool dvv_descends(const std::vector<dvv> &a, const std::vector<dvv> &b) {
-    // TODO
 }
 
 bool dvv_dominates(const std::vector<dvv> &a, const std::vector<dvv> &b);
