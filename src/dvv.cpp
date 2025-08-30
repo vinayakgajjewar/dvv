@@ -106,8 +106,7 @@ dvv dvv_update(const std::vector<dvv> &ctx, const std::vector<dvv> &node_dvvs, c
 
 void dvv_print(const dvv &d) {
     for (const auto &[id, counters]: d) {
-        std::cout << id << std::endl;
-        std::cout << "\t";
+        std::cout << id << ": ";
         for (auto c: counters) {
             std::cout << c << ",";
         }
