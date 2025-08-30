@@ -1,0 +1,4 @@
+#ifndef INCLUDE_CLIENT_HPP
+#define INCLUDE_CLIENT_HPP
+
+#endif
