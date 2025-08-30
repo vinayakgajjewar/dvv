@@ -73,15 +73,23 @@ int dvv_ceil(const std::vector<dvv> &dvvs, const std::string &id) {
 
 std::vector<dvv> dvv_sync(const std::vector<dvv> &a, const std::vector<dvv> &b) {
     std::vector<dvv> concurrent;
-    auto a_ids = dvv_ids(a);
-    auto b_ids = dvv_ids(b);
-    std::unordered_set<std::string> ids(a_ids.begin(), a_ids.end());
-    ids.insert(b_ids.begin(), b_ids.end());
-    for (const auto &id: ids) {
-        // TODO
+    for (const dvv &a_dvv: a) {
+        for (const dvv &b_dvv: b) {
+            if (dvv_leq(a_dvv, b_dvv)) concurrent.push_back(b_dvv);
+            if (dvv_leq(b_dvv, a_dvv)) concurrent.push_back(a_dvv);
+        }
     }
+    return concurrent;
 }
 
-std::vector<dvv> dvv_update() {
-
+dvv dvv_update(const std::vector<dvv> &ctx, const std::vector<dvv> &node_dvvs, const std::string &node_id) {
+    dvv updated;
+    for (const auto &ctx_id: dvv_ids(ctx)) {
+        if (ctx_id == node_id) continue;
+        auto new_counter = dvv_ceil(ctx, ctx_id);
+        updated[ctx_id] = {new_counter};
+    }
+    auto s_r = dvv_ceil(node_dvvs, node_id);
+    updated[node_id] = {s_r, s_r + 1};
+    return updated;
 }

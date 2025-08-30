@@ -32,6 +32,6 @@ bool dvv_leq(const dvv &, const dvv &);
 
 std::vector<dvv> dvv_sync(const std::vector<dvv> &, const std::vector<dvv> &);
 
-std::vector<dvv> dvv_update(const std::vector<dvv> &, const std::vector<dvv> &, std::string);
+dvv dvv_update(const std::vector<dvv> &, const std::vector<dvv> &, const std::string &);
 
 #endif
