@@ -1,5 +1,9 @@
 #include "../include/node.hpp"
 
+node::node(const std::string &id) {
+    this->id = id;
+}
+
 std::vector<std::pair<std::string, dvv>> node::get(const std::string &k) {
     return store[k];
 }
@@ -16,10 +20,12 @@ void node::put(const std::string &k, const std::string &v, const dvv &ctx) {
             sibling.second[id][0]++;
             sibling.first = v;
         } else {
+
             /*
-             * TODO
-             * How to handle this case?
+             * If the client's context doesn't descend our local DVV, we have to
+             * store the value as a sibling.
              */
+            store[k].push_back(std::make_pair(v, dvv_sync()));
         }
     }
 }

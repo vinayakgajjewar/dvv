@@ -12,6 +12,11 @@ private:
 public:
 
     /*
+     * Initialize a new replica node with a given ID.
+     */
+    node(const std::string &);
+
+    /*
      * Return all the concurrent values that this replica node stores for the
      * given key.
      */
